@@ -1,21 +1,25 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright 2020 soapsoapsoaps@outlook.com
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Succu_ServiceCharacter.generated.h"
+#include "SS_Character.generated.h"
 
-UCLASS(Blueprintable)
-class ASuccu_ServiceCharacter : public ACharacter
+UCLASS()
+class SUCCU_SERVICE_API ASS_Character : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	ASuccu_ServiceCharacter();
+	// Sets default values for this character's properties, lmao "ASS"
+	ASS_Character();
 
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
@@ -23,6 +27,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 private:
 	/** Top down camera */
@@ -36,5 +44,5 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
-};
 
+};

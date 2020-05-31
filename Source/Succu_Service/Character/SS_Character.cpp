@@ -1,6 +1,7 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Succu_ServiceCharacter.h"
+
+#include "SS_Character.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DecalComponent.h"
@@ -12,9 +13,10 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 
-ASuccu_ServiceCharacter::ASuccu_ServiceCharacter()
+// Sets default values
+ASS_Character::ASS_Character()
 {
-	// Set size for player capsule
+ 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// Don't rotate character to camera direction
@@ -57,9 +59,17 @@ ASuccu_ServiceCharacter::ASuccu_ServiceCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
-void ASuccu_ServiceCharacter::Tick(float DeltaSeconds)
+// Called when the game starts or when spawned
+void ASS_Character::BeginPlay()
 {
-    Super::Tick(DeltaSeconds);
+	Super::BeginPlay();
+	
+}
+
+// Called every frame
+void ASS_Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 
 	if (CursorToWorld != nullptr)
 	{
@@ -88,3 +98,11 @@ void ASuccu_ServiceCharacter::Tick(float DeltaSeconds)
 		}
 	}
 }
+
+// Called to bind functionality to input
+void ASS_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+}
+

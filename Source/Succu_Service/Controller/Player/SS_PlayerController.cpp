@@ -1,19 +1,20 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright 2020 soapsoapsoaps@outlook.com
 
-#include "Succu_ServicePlayerController.h"
+
+#include "SS_PlayerController.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
-#include "Succu_ServiceCharacter.h"
+#include "Succu_Service/Character/SS_Character.h"
 #include "Engine/World.h"
 
-ASuccu_ServicePlayerController::ASuccu_ServicePlayerController()
+ASS_PlayerController::ASS_PlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
 
-void ASuccu_ServicePlayerController::PlayerTick(float DeltaTime)
+void ASS_PlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
@@ -24,31 +25,31 @@ void ASuccu_ServicePlayerController::PlayerTick(float DeltaTime)
 	}
 }
 
-void ASuccu_ServicePlayerController::SetupInputComponent()
+void ASS_PlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ASuccu_ServicePlayerController::OnSetDestinationPressed);
-	InputComponent->BindAction("SetDestination", IE_Released, this, &ASuccu_ServicePlayerController::OnSetDestinationReleased);
+	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ASS_PlayerController::OnSetDestinationPressed);
+	InputComponent->BindAction("SetDestination", IE_Released, this, &ASS_PlayerController::OnSetDestinationReleased);
 
 	// support touch devices 
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ASuccu_ServicePlayerController::MoveToTouchLocation);
-	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ASuccu_ServicePlayerController::MoveToTouchLocation);
+	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ASS_PlayerController::MoveToTouchLocation);
+	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ASS_PlayerController::MoveToTouchLocation);
 
-	InputComponent->BindAction("ResetVR", IE_Pressed, this, &ASuccu_ServicePlayerController::OnResetVR);
+	InputComponent->BindAction("ResetVR", IE_Pressed, this, &ASS_PlayerController::OnResetVR);
 }
 
-void ASuccu_ServicePlayerController::OnResetVR()
+void ASS_PlayerController::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void ASuccu_ServicePlayerController::MoveToMouseCursor()
+void ASS_PlayerController::MoveToMouseCursor()
 {
 	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 	{
-		if (ASuccu_ServiceCharacter* MyPawn = Cast<ASuccu_ServiceCharacter>(GetPawn()))
+		if (ASS_Character* MyPawn = Cast<ASS_Character>(GetPawn()))
 		{
 			if (MyPawn->GetCursorToWorld())
 			{
@@ -70,7 +71,7 @@ void ASuccu_ServicePlayerController::MoveToMouseCursor()
 	}
 }
 
-void ASuccu_ServicePlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)
+void ASS_PlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	FVector2D ScreenSpaceLocation(Location);
 
@@ -84,7 +85,7 @@ void ASuccu_ServicePlayerController::MoveToTouchLocation(const ETouchIndex::Type
 	}
 }
 
-void ASuccu_ServicePlayerController::SetNewMoveDestination(const FVector DestLocation)
+void ASS_PlayerController::SetNewMoveDestination(const FVector DestLocation)
 {
 	APawn* const MyPawn = GetPawn();
 	if (MyPawn)
@@ -99,13 +100,13 @@ void ASuccu_ServicePlayerController::SetNewMoveDestination(const FVector DestLoc
 	}
 }
 
-void ASuccu_ServicePlayerController::OnSetDestinationPressed()
+void ASS_PlayerController::OnSetDestinationPressed()
 {
 	// set flag to keep updating destination until released
 	bMoveToMouseCursor = true;
 }
 
-void ASuccu_ServicePlayerController::OnSetDestinationReleased()
+void ASS_PlayerController::OnSetDestinationReleased()
 {
 	// clear flag to indicate we should stop updating the destination
 	bMoveToMouseCursor = false;

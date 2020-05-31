@@ -1,18 +1,21 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright 2020 soapsoapsoaps@outlook.com
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "Succu_ServicePlayerController.generated.h"
+#include "SS_PlayerController.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
-class ASuccu_ServicePlayerController : public APlayerController
+class SUCCU_SERVICE_API ASS_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	ASuccu_ServicePlayerController();
+	ASS_PlayerController();
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -38,6 +41,5 @@ protected:
 	/** Input handlers for SetDestination action. */
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
+	
 };
-
-

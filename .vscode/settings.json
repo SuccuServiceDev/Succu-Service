@@ -1,0 +1,12 @@
+{
+	"files.exclude": {
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/.git": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/.vs": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/.vscode": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/Content": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/Intermediate": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/packages": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/Saved": true,
+		"C:/Users/ferda/Documents/Unreal Projects/Succu_Service/UnitTests": true
+	}
+}
